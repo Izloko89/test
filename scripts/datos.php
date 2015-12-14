@@ -15,7 +15,7 @@ if($_SERVER['SERVER_ADDR']=="65.99.205.96"){
 	$optPDO=array(PDO::ATTR_EMULATE_PREPARES=>false, PDO::ATTR_ERRMODE=>PDO::ERRMODE_EXCEPTION);
 }else{
 	//para DSN PDO en localhost
-	$dsnw="mysql:host=localhost; dbname=ssistema_bichos; charset=utf8";
+	$dsnw="mysql:host=localhost; dbname=lacanaperia; charset=utf8";
 	$userw="admin";
 	$passw="admin";
 	$optPDO=array(PDO::ATTR_EMULATE_PREPARES=>false, PDO::ATTR_ERRMODE=>PDO::ERRMODE_EXCEPTION);

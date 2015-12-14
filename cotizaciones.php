@@ -164,7 +164,7 @@ table{
           </div>
           <div class="campo_form">
             <label class="">Nombre del festejado</label>
-      <input type="text" name="nombre" class="nombre text_largo requerido">
+      <input type="text" name="nombre" class="nombre text_largo">
           </div>
              <div class="campo_form">
             <label class="">Personaje Elegido</label>
