@@ -27,48 +27,29 @@ try{
 	}
 
 	
-	$bd=new PDO($dsnw, $userw, $passw, $optPDO);
+	$res=$bd->query("select * from cotizaciones");
 	$sql="SELECT 
 		cotizaciones.nombre as label,
 		id_cotizacion,
 		cotizaciones.id_empresa,
 		cotizaciones.id_usuario,
 		cotizaciones.id_cliente,
-		cotizaciones.edad,
-		cotizaciones.no_personas,
-		cotizaciones.no_ninos,
-		cotizaciones.no_adultos,
-		cotizaciones.medio,
 		clientes.nombre as cliente_cotizacion,
 		cotizaciones.clave,
 		cotizaciones.salon,
 		cotizaciones.eventosalon,
 		cotizaciones.nombre,
-		cotizaciones.personaje,
-		cotizaciones.promocion,
-		cotizaciones.color_mantel,
-		cotizaciones.pastel,
-		cotizaciones.pinata,
-		cotizaciones.centro_mesa,
-		cotizaciones.invitaciones,
-		cotizaciones.servicios_extra,
-		cotizaciones.no_ninos_menu,
-		cotizaciones.no_adultos_menu,
-		cotizaciones.promocion,
-		cotizaciones.guarnicion,
-		cotizaciones.botana,
-		cotizaciones.aguas,
-		cotizaciones.refrescos,
-		cotizaciones.hora_cena,
 		tipo_evento.id_tipo,
 		fechaevento,
 		fechamontaje,
-		fechadesmont
+		fechadesmont,
+		dirEvento,
+		telefonoContacto,
+		noinvitados
 	FROM cotizaciones
 	INNER JOIN tipo_evento ON tipo_evento.id_tipo=cotizaciones.id_tipo
 	INNER JOIN clientes ON cotizaciones.id_cliente=clientes.id_cliente 
 	WHERE cotizaciones.clave='$term' AND id_usuario=$id_user;";
-	
 	$res=$bd->query($sql);
 	$filas=$res->rowCount();
 	$res=$res->fetchAll(PDO::FETCH_ASSOC);
