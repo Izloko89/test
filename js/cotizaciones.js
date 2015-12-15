@@ -235,31 +235,34 @@ function art_autocompletar(id){
 	  source: "scripts/busca_articulos.php",
 	  minLength: 1,
 	  select: function( event, ui ) {
-		  total.parent().parent().removeClass("verde_ok");
-		  id_articulo.val(ui.item.id_articulo);
-		  id_paquete.val(ui.item.id_paquete);
-		  precio.html(ui.item.precio);
-		  totalca=cantidad*ui.item.precio;
-		  total.html(totalca);
-		  $('#preview-img-'+id).append('<img src="img/articulos/'+ui.item.image+'" width="130" height="100" />');
- 			$.ajax({
- 				url:'scripts/busca_existencia.php',
- 				cache:false,
- 				async:false,
- 				data:{
- 					'art':art,
- 					'cot':cot,
- 					'cant':cantidad
- 				},
- 				success: function(r){
- 					if(r){
- 						alerta("info", r);
- 					}
- 				}
- 			});
- 	  }
- 	});
- }
+			total.parent().parent().removeClass("verde_ok");
+			console.log(ui);
+			id_articulo.val(ui.item.id_articulo);
+			art = ui.item.id_articulo;
+			cot = document.getElementById("clave").value;
+			id_paquete.val(ui.item.id_paquete);
+			precio.html(ui.item.precio);
+			totalca=cantidad*ui.item.precio;
+			total.html(totalca);
+			$('#preview-img-'+id).empty().append('<img src="img/articulos/'+ui.item.image+'" width="130" height="100" />');
+			$.ajax({
+				url:'scripts/busca_existencia.php',
+				cache:false,
+				async:false,
+				data:{
+					'art':art,
+					'cot':cot,
+					'cant':cantidad
+				},
+				success: function(r){
+					if(r){
+						alerta("info", r);
+					}
+				}
+			});
+	  }
+	});
+}
 function cambiar_cant(id){
 	padre=$("#"+id);
 	cantidad=padre.find(".cantidad").val()*1;
