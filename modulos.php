@@ -38,8 +38,8 @@ include("scripts/permisos.php");
 <div id="tabs">
 <ul>
   <li><a href="#acciones">Acciones</a></li>
-  <li><a href="#reportes">Reportes</a></li>
-  <li><a href="#config">Configuraciones</a></li>
+  <!-- <li><a href="#reportes">Reportes</a></li>
+  <li><a href="#config">Configuraciones</a></li> -->
 </ul>
 
 
@@ -72,7 +72,7 @@ else
     </div>
     <div id="formularios_modulo" style="padding-top:10px;"></div>
 </div>
-<div id="reportes">
+<!-- <div id="reportes">
 	<label>Sección a reportar</label><select class="seccion" name="seccion" onchange="filtro1(this);">
     	<option value="eventos">Eventos</option>
         <option value="proveedores">Proveedores</option>
@@ -80,8 +80,7 @@ else
     </select>
     <label>Filtrar por:</label><select class="filtro1" name="filtro1" onchange="filtro(this)"></select>
 </div>
-<div id="config">
-</div>
+<div id="config"> -->
 </div>
 </div>
 <?php include("partes/footer.php"); ?>
