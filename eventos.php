@@ -290,7 +290,7 @@ table{
             </div>
         </div>
     </div>
-    <div align="left" class="formularios">
+    <!-- <div align="left" class="formularios">
     <h3 class='titulo_form'>Empleados</h3>
       
       Puesto: 
@@ -308,7 +308,7 @@ table{
           }
         ?>
         </select>
-            </div>
+            </div> -->
     
 
     <div align="left" class="formularios">
