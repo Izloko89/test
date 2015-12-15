@@ -61,23 +61,8 @@ try{
         <select name="area" class="area"><option selected="selected" value="">Área</option><?php afs("area"); ?></select>
         <select name="familia" class="familia"><option selected="selected" value="">Familia</option><?php afs("familia"); ?></select>
         <select name="subfamilia" class="subfamilia"><option selected="selected" value="">SubFamilia</option><?php afs("subfamilia"); ?></select>
-    
-</form>
-<form id="addImage" action="scripts/upload.php" method="post" enctype="multipart/form-data">
-    <label class="label_width">Seleccionar imagen :</label>
-    <input type="file" name="fileToUpload" id="fileToUpload">
-    <div align="right">
-		<input type="submit" value="Guardar" id="addImageButton" name="submit">
-    	<input type="button" class="volver" value="VOLVER">
-	</div>
-</form>
 
-<div id="uploadPreview"></div>
-<div id="infoMessage"></div>
-</div>
-<form id="f_listado_precios" class="formularios">
-<h3 class="titulo_form">Costos y Precios</h3>
-  <input type="hidden" name="id_item" class="id_item" />
+     <input type="hidden" name="id_item" class="id_item" />
   <input type="hidden" name="id_empresa" class="id_empresa" value="<?php empresa(); ?>">
     <div class="campo_form">
         <label class="label_width">Precio de recuperación</label>
@@ -98,10 +83,28 @@ try{
     <div class="campo_form">
         <label class="label_width">Precio de patrocinio</label>
         <input type="text" name="precio4" class="precio4" />
-    </div>
+    </div>     
+    
+</form>
+<form id="addImage" action="scripts/upload.php" method="post" enctype="multipart/form-data">
+    <label class="label_width">Seleccionar imagen :</label>
+    <input type="file" name="fileToUpload" id="fileToUpload">
+    <div align="right">
+		<input type="submit" value="Guardar" id="addImageButton" name="submit">
+    	<input type="button" class="volver" value="VOLVER">
+	</div>
 </form>
 
 
+</div>
+
+
+
+</form>
+<center>
+<div id="uploadPreview"></div>
+<div id="infoMessage"></div>
+</center>
 </div>
 
 <div class="formularios">
@@ -289,6 +292,7 @@ $('#addImageButton').click(function(){
 	var emp = <?php echo $emp ?>;
 	if (clave && compra && precio1){
 		if(!($('#fileToUpload')[0].value)){
+			console.log('Guardando sin imagen');
 			$.get( "scripts/addImageQuery.php",{ 
 	  			'clave':clave,
 	  			'nombre':nombre,
@@ -306,12 +310,14 @@ $('#addImageButton').click(function(){
 	  			 }).done(function(data) {
   					if(data.continuar){
   						alerta("info","Se agrego el articulo correctamente");
+  						resetform();
   					}else{
   						alerta("error", "Hubo un error al guardar el articulo");
   						}
 					});
   			return false;
 	 	}
+	 	console.log('Subiendo imagen..');
 		$('#addImage').ajaxForm({
 			dataType: 'json',
 	 	success: function(response) {
@@ -336,6 +342,7 @@ $('#addImageButton').click(function(){
 	  				console.log(data);
   					if(data.continuar){
   						alerta("info","Se agrego la imagen para este articulo");
+  						resetform();
   					}else{
   						alerta("error", "Hubo un error guarde primero el articulo");
   						}

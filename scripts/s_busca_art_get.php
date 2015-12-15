@@ -29,6 +29,7 @@ try{
 		familias.id_familia,
 		subfamilias.id_subfamilia,
 		articulos.perece,
+		articulos.image,
 		listado_precios.*
 	FROM articulos
 	LEFT JOIN listado_precios ON articulos.id_articulo=listado_precios.id_articulo
