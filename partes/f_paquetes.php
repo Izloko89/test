@@ -390,5 +390,77 @@ $("#fileToUpload").change(function (e) {
 	}
 });
 
+$('#addImageButton').click(function(){
+	var clave = $('.clave').val();
+	var nombre = $('.nombre').val();
+	var desc = $('.descripcion').val();
+	var unidad = $('.unidades').val();
+	var compra = $('.compra').val();
+	var precio1 = $('.precio1').val();
+	var precio2 = $('.precio2').val();
+	var precio3 = $('.precio3').val();
+	var precio4 = $('.precio4').val();
+	var emp = <?php echo $id_emp ?>;
+	if (clave && compra && precio1){
+		if(!($('#fileToUpload')[0].value)){
+			console.log('Guardando sin imagen');
+			$.get( "scripts/addPaquetesImage.php",{ 
+	  			'clave':clave,
+	  			'nombre':nombre,
+	  			'desc':desc,
+	  			'unidad':unidad,
+	  			 'emp':emp,
+	  			 'precio1':precio1,
+	  			 'precio2':precio2,
+	  			 'precio3':precio3,
+	  			 'precio4':precio4,
+	  			 'compra':compra
+	  			 }).done(function(data) {
+  					if(data.continuar){
+  						alerta("info","Se agrego el articulo correctamente");
+  						resetform();
+  					}else{
+  						alerta("error", "Hubo un error al guardar el articulo");
+  						}
+					});
+  			return false;
+	 	}
+	 	console.log('Subiendo imagen..');
+		$('#addImage').ajaxForm({
+			dataType: 'json',
+	 	success: function(response) {
+	 		console.log(response);
+	  		$('#infoMessage').empty().prepend(response.info + response.status);
+	  		$.get( "scripts/addPaquetesImage.php",{ 
+	  			'clave':clave,
+	  			'nombre':nombre,
+	  			'desc':desc,
+	  			'unidad':unidad,
+	  			 'image':response.imagen,
+	  			 'emp':emp,
+	  			 'precio1':precio1,
+	  			 'precio2':precio2,
+	  			 'precio3':precio3,
+	  			 'precio4':precio4,
+	  			 'compra':compra
+	  			 }).done(function(data) {
+	  				console.log(data);
+  					if(data.continuar){
+  						alerta("info","Se agrego la imagen para este articulo");
+  						resetform();
+  					}else{
+  						alerta("error", "Hubo un error guarde primero el articulo");
+  						}
+					});
+	 		}
+		});
+	}else{
+		$('.clave').addClass('falta_llenar');
+		$('.compra').addClass('falta_llenar');
+		$('.precio1').addClass('falta_llenar');
+		return false;
+	}
+});
+
 </script>
 <script src="http://malsup.github.com/jquery.form.js"></script>
