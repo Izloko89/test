@@ -39,7 +39,7 @@ $(document).ready(function(e) {
 	id_cotizacion=$(".id_cotizacion").first().val();
 	$(".agregar_articulo").click(function(){
 		id=$(".lista_articulos").length+1;
-		$("#articulos").append('<tr id="'+id+'" class="lista_articulos"><td style="background-color:#FFF;"><input type="hidden" class="id_item" value="" /><input type="hidden" class="id_cotizacion" value="" /><input type="hidden" class="id_articulo" /><input type="hidden" class="id_paquete" /></td><td><input class="cantidad" type="text" size="7" onkeyup="cambiar_cant('+id+')" /></td><td><input class="articulo_nombre text_full_width" onkeyup="art_autocompletar('+id+');" /></td><td>$<span class="precio"></span></td><td>$<span class="total"></span></td><td><span class="guardar_articulo" onclick="guardar_art('+id+')"></span><span class="eliminar_articulo" onclick="eliminar_art('+id+')"></span></td></tr>');
+		$("#articulos").append('<tr id="'+id+'" class="lista_articulos"><td style="background-color:#FFF;"><input type="hidden" class="id_item" value="" /><input type="hidden" class="id_cotizacion" value="" /><input type="hidden" class="id_articulo" /><input type="hidden" class="id_paquete" /></td><td><input class="cantidad" type="text" size="7" onkeyup="cambiar_cant('+id+')" /></td><td><input class="articulo_nombre text_full_width" onkeyup="art_autocompletar('+id+');" /></td><td>$<span class="precio"></span></td><td>$<span class="total"></span></td><td><span class="guardar_articulo" onclick="guardar_art('+id+')"></span><span class="eliminar_articulo" onclick="eliminar_art('+id+')"></span></td><td id="preview-img-'+id+'"></td></tr>');
 		$.each($(".lista_articulos"),function(i,v){
 			$(this).find(".id_cotizacion").val(id_cotizacion);
 		});
@@ -241,9 +241,25 @@ function art_autocompletar(id){
 		  precio.html(ui.item.precio);
 		  totalca=cantidad*ui.item.precio;
 		  total.html(totalca);
-	  }
-	});
-}
+		  $('#preview-img-'+id).append('<img src="img/articulos/'+ui.item.image+'" width="130" height="100" />');
+ 			$.ajax({
+ 				url:'scripts/busca_existencia.php',
+ 				cache:false,
+ 				async:false,
+ 				data:{
+ 					'art':art,
+ 					'cot':cot,
+ 					'cant':cantidad
+ 				},
+ 				success: function(r){
+ 					if(r){
+ 						alerta("info", r);
+ 					}
+ 				}
+ 			});
+ 	  }
+ 	});
+ }
 function cambiar_cant(id){
 	padre=$("#"+id);
 	cantidad=padre.find(".cantidad").val()*1;
