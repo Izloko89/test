@@ -80,6 +80,12 @@ $botones["ventas"]=array(
 		"tabla"=>"f_empleado.php",
 		"nombre"=>"Empleados",
 	),
+	array(
+		"accion"=>"boton_abrir_form_dos",
+		"metodo"=>"individual",
+		"tabla"=>"f_conceptos.php",
+		"nombre"=>"Conceptos",
+	),
 );
 
 //botones para coordinador de ventas

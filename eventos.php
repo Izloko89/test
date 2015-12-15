@@ -142,7 +142,7 @@ table{
 				 <input type="text" id="clave" name="clave" class="clave label clave_evento requerido mayuscula text_corto" data-nueva="<?php nuevaClaveCotizar(); ?>" value="" />
 			<?php } ?>
           </div>
-        <div class="campo_form celda fondo_azul" align="center">
+        <!-- <div class="campo_form celda fondo_azul" align="center">
         	<label>Salón</label><input class="eventosalon salonr" type="radio" name="quitar" value="salon" />
             <label>Evento</label><input class="eventosalon eventor" type="radio" name="quitar" value="evento" />
             <input type="hidden" class="eventosalon_h" name="eventosalon" />
@@ -153,7 +153,7 @@ table{
             	<option selected disabled>Elige un salón</option>
             	<?php salonesOpt();	?>
             </select>
-		</div>
+		</div> -->
         <div class="campo_form celda" style="">
 			<label>Tipo de evento</label>
 			<select name="id_tipo" class="id_tipo">
@@ -170,114 +170,21 @@ table{
           </div>
           <div class="campo_form">
             <label class="">Nombre del evento</label>
-			<input type="text" name="nombre" class="nombre text_largo requerido" />
+      <input type="text" id="nombre" name="nombre" class="nombre text_largo requerido">
           </div>
+             <div class="campo_form">
+            <label class="">Direcci&oacute;n del Evento</label>
+      <input type="text" name="dirEvento" class="dirEvento text_largo">
+          </div>    
           <div class="campo_form">
-            <label class="">Personaje Elegido</label>
-			<input type="text" name="personaje" class="personaje text_largo requerido" />
+            <label class="">Tel&eacute;fono contacto</label>
+      <input type="text" name="telefonoContacto" class="telefonoContacto text_largo">
+          </div>          
+          <div class="campo_form" align="left">
+            <label style="width:120px;">No. de Invitados</label>
+      <input type="text" name="noinvitados" class="text_corto noinvitados"/>
           </div>
-          
-          
-          
-               <div class="campo_form" align="left">
-            <label class="">Edad que cumple</label>
-			<input type="text" name="edad" class="edad text_corto requerido" />
-          </div>
-          
-               <div class="campo_form" align="left">
-            <label class="">No. de personas</label>
-			<input type="text" name="no_personas" class="no_personas text_corto requerido" />
-			  <label class="">Niños</label>
-			<input type="text" name="no_ninos" class="no_ninos text_corto requerido" />
-			  <label class="">Adultos</label>
-			<input type="text" name="no_adultos" class="no_adultos text_corto requerido" />
-          </div>
-          
-          
-          <div class="campo_form">
-            <label class="">Medio</label>
-      <input type="text" name="medio" class="medio text_largo ">
-          </div>
-          
-        <div class="campo_form">
-            <label class="">promocion</label>
-      <input type="text" name="promocion" class="promocion text_largo ">
-          </div>
-          
-             <div class="campo_form">
-            <label class="">Color del mantel</label>
-      <input type="text" name="color_mantel" class="color_mantel text_largo ">
-          </div>
-          
-             <div class="campo_form">
-            <label class="">Pastel</label>
-      <input type="text" name="pastel" class="pastel text_largo ">
-          </div>
-          
-             <div class="campo_form">
-            <label class="">Piñata</label>
-      <input type="text" name="pinata" class="pinata text_largo ">
-          </div>
-             <div class="campo_form">
-            <label class="">Centro de mesa</label>
-      <input type="text" name="centro_mesa" class="centro_mesa text_largo ">
-          </div>
-             <div class="campo_form">
-            <label class="">Invitaciones</label>
-      <input type="text" name="invitaciones" class="invitaciones text_largo ">
-          </div>
-          
-          
-            <div class="campo_form"> 
-              <label class="">Servicios Extra</label>
-    <textarea rows="4" cols="85" name="servicios_extra" class="servicios_extra">    
-      </textarea>
-      </div>
-          
-          
-             <fieldset>
-<legend align="center">MENU</legend>
-           <div class="campo_form" align="left">
-            <label class="">Niños</label>
-      <input type="text" name="no_ninos_menu" class="no_ninos_menu text_corto requerido">
-        <label class="">Adultos</label>
-      <input type="text" name="no_adultos_menu" class="no_adultos_menu text_corto requerido">
-      </div>
-      
-        <div class="campo_form">
-            <label class="">Guarnicion</label>
-      <input type="text" name="guarnicion" class="guarnicion text_largo ">
-          </div>
-          
-            <div class="campo_form">
-            <label class="">Botana</label>
-      <input type="text" name="botana" class="botana text_largo ">
-          </div>
-          
-           <div class="campo_form" align="left">
-           
-            <label class="">Aguas Frescas</label>
-          
-      <input type="text" name="aguas" class="aguas text_largo ">  </div>
-      <div class="campo_form" align="left">
-        <label class="">Refrescos</label>
-      <input type="text" name="refrescos" class="refrescos text_largo ">
-      
-          </div>
-          </fieldset>
-          
-            <fieldset>
-<legend align="center">INTINERARIO</legend>
-           <div class="campo_form" align="left">
-           
-        <label class="">Hora de cena</label>
-        
-      <input type="time" name="hora_cena" class="hora_cena">
-
-      
-      </div>
-      </fieldset>
-		</div>
+		    </div>
           <div class="celda" style="">
           <div class="campo_form">
               <label class="align_right" style="width:120px;">Fecha del evento</label>

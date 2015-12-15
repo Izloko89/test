@@ -168,15 +168,15 @@ table{
           </div>
              <div class="campo_form">
             <label class="">Direcci&oacute;n del Evento</label>
-      <input type="text" id="dirEvento" class="dirEvento text_largo">
+      <input type="text" name="dirEvento" class="dirEvento text_largo">
           </div>    
           <div class="campo_form">
             <label class="">Tel&eacute;fono contacto</label>
-      <input type="text" id="telefonoContacto" class="telefonoContacto text_largo">
+      <input type="text" name="telefonoContacto" class="telefonoContacto text_largo">
           </div>          
           <div class="campo_form" align="left">
             <label style="width:120px;">No. de Invitados</label>
-      <input type="text" id="noinvitados" class="text_corto noinvitados"/>
+      <input type="text" name="noinvitados" class="text_corto noinvitados"/>
           </div>
     </div>
         <div class="celda" style="">
