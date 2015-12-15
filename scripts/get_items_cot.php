@@ -14,6 +14,7 @@ try{
 		cotizaciones_articulos.id_item,
 		listado_precios.id_articulo,
 		articulos.nombre,
+		articulos.image as imagen,
 		cantidad,
 		precio,
 		precio1 as p1,
@@ -31,6 +32,8 @@ try{
 	$id=1;
 	foreach($res->fetchAll(PDO::FETCH_ASSOC) as $v){
 		//hacer el select para los precios
+		$imagen = $v["imagen"];
+		
 		$precios='<select class="precios" onchange="darprecio(this);" style="margin-right:3px;">
 			<option selected="selected" value="'.$v["precio"].'">$'.$v["precio"].'</option>
 			<option disabled="disabled">------</option>
@@ -48,8 +51,13 @@ try{
 			<td><input class="articulo_nombre text_full_width" onkeyup="art_autocompletar('.$id.');" value="'.$v["nombre"].'" /></td>
 			<td>'.$precios.'<span class="precio" >'.$v["precio"].'</span></td>
 			<td>$<span class="total">'.$v["total"].'</span></td>
-			<td><span class="guardar_articulo" onclick="guardar_art('.$id.')"></span><span class="eliminar_articulo" onclick="eliminar_art('.$id.')"></span></td>
-		</tr>';
+			<td><span class="guardar_articulo" onclick="guardar_art('.$id.')"></span><span class="eliminar_articulo" onclick="eliminar_art('.$id.')"></span></td>';
+		if(isset($imagen)){
+			$imagen = str_replace(" ","%20",$imagen);
+			$elementos.='<td> <img src=img/articulos/'.$imagen.' width="130" height="100" alt=""> </td></tr>';
+		}else{
+			$elemetos.='</tr>';
+		}	
 		$id++;
 	}
 	

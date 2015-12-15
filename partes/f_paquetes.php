@@ -107,11 +107,8 @@ try{
         <label class="label_width">Unidades</label>
         <input type="text" name="unidades" class="unidades">
     </div>
-</form>
-<form id="f_listado_precios" class="formularios">
-<h3 class="titulo_form">Costos y Precios</h3>
-  <input type="hidden" name="id_item" class="id_item" />
-  <input type="hidden" name="id_empresa" class="id_empresa" value="<?php empresa(); ?>">
+  	<input type="hidden" name="id_item" class="id_item" />
+  	<input type="hidden" name="id_empresa" class="id_empresa" value="<?php empresa(); ?>">
     <div class="campo_form">
         <label class="label_width">Precio de compra</label>
         <input type="text" name="compra" class="compra requerido" />
@@ -131,13 +128,22 @@ try{
     <div class="campo_form">
         <label class="label_width">Precio de otro concepto</label>
         <input type="text" name="precio4" class="precio4" />
-    </div>
+
 </form>
+<form id="addImage" action="scripts/upload.php" method="post" enctype="multipart/form-data">
+    <label class="label_width">Seleccionar imagen :</label>
+    <input type="file" name="fileToUpload" id="fileToUpload">
     <div align="right">
-        <input type="button" class="guardar" value="GUARDAR" data-m="pivote">
-        <input type="button" class="modificar" value="MODIFICAR" style="display:none;">
-        <input type="button" class="volver" value="VOLVER">
-    </div>
+		<input type="submit" value="Guardar" id="addImageButton" name="submit">
+    	<input type="button" class="volver" value="VOLVER">
+	</div>
+</form>
+</div>
+<center>
+<div id="uploadPreview"></div>
+<div id="infoMessage"></div>
+</center>
+  
 <div id="articulos" class="formularios">
   <h3 class="titulo_form">Artículos en el paquete</h3>
   <div align="center">
@@ -217,6 +223,7 @@ $(document).ready(function(e) {
 			case 'clave':
 				$(".clave").val(val);
 				scrollTop();
+				$('#fileToUpload').show();
 				buscarClave();
 			break;
 		}
@@ -267,7 +274,14 @@ function buscarClave(){
 		$.each(r,function(i,v){
 			$("."+i).empty().text(v);
 			$("."+i).empty().val(v);
-
+			if(i=='image'){
+				if(v){
+					image = v.replace(" ", '%20');
+					$('#uploadPreview').empty().prepend('<img src=img/articulos/'+ image +'> <br>');
+				}else{
+					$('#uploadPreview').empty();
+				}
+			}
 		});
 		buscaArtPaq(r.id_paquete);
 		//asigna el id de cotización
@@ -333,4 +347,120 @@ function eliminar(e){
 		}
 	});
 }
+function readImage(file) {
+
+    var reader = new FileReader();
+    var image  = new Image();
+
+    reader.readAsDataURL(file);  
+    reader.onload = function(_file) {
+        image.src    = _file.target.result;              // url.createObjectURL(file);
+        image.onload = function() {
+            var w = this.width,
+                h = this.height,
+                t = file.type,                           // ext only: // file.type.split('/')[1],
+                n = file.name,
+                s = ~~(file.size/1024) +'KB';
+            if(w <= 250 && h <= 250){
+            	$('#uploadPreview').empty().prepend('<img src="'+ this.src +'"> '+w+'x'+h+' '+s+' '+t+' '+n+'<br>');
+
+            }else{
+            	$('#uploadPreview').empty().prepend('<br> Eliga una imagen no mayor a 250x250');
+
+            }
+            
+        };
+        image.onerror= function() {
+            alert('Formato de imagen incorrecto: '+ file.type);
+        };      
+    };
+
+}
+
+$("#fileToUpload").change(function (e) {
+    var imgPath = $(this)[0].value;
+    var extn = imgPath.substring(imgPath.lastIndexOf('.') + 1).toLowerCase();
+    if (extn == "png" || extn == "jpg" || extn == "jpeg") {
+    	if(this.disabled) return alert('Archivo no soportado');
+    	var F = this.files;
+    	if(F && F[0]) for(var i=0; i<F.length; i++) readImage( F[i] );
+	}else{
+		$('#uploadPreview').empty().prepend('<br> Los formatos validos son: jpg, jpeg y png');
+
+	}
+});
+
+$('#addImageButton').click(function(){
+	var clave = $('.clave').val();
+	var nombre = $('.nombre').val();
+	var desc = $('.descripcion').val();
+	var unidad = $('.unidades').val();
+	var compra = $('.compra').val();
+	var precio1 = $('.precio1').val();
+	var precio2 = $('.precio2').val();
+	var precio3 = $('.precio3').val();
+	var precio4 = $('.precio4').val();
+	var emp = <?php echo $id_emp ?>;
+	if (clave && compra && precio1){
+		if(!($('#fileToUpload')[0].value)){
+			console.log('Guardando sin imagen');
+			$.get( "scripts/addPaquetesImage.php",{ 
+	  			'clave':clave,
+	  			'nombre':nombre,
+	  			'desc':desc,
+	  			'unidad':unidad,
+	  			 'emp':emp,
+	  			 'precio1':precio1,
+	  			 'precio2':precio2,
+	  			 'precio3':precio3,
+	  			 'precio4':precio4,
+	  			 'compra':compra
+	  			 }).done(function(data) {
+  					if(data.continuar){
+  						alerta("info","Se agrego el articulo correctamente");
+  						resetform();
+  					}else{
+  						alerta("error", "Hubo un error al guardar el articulo");
+  						}
+					});
+  			return false;
+	 	}
+	 	console.log('Subiendo imagen..');
+		$('#addImage').ajaxForm({
+			dataType: 'json',
+	 	success: function(response) {
+	 		console.log(response);
+	  		$('#infoMessage').empty().prepend(response.info + response.status);
+	  		$.get( "scripts/addPaquetesImage.php",{ 
+	  			'clave':clave,
+	  			'nombre':nombre,
+	  			'desc':desc,
+	  			'unidad':unidad,
+	  			 'image':response.imagen,
+	  			 'emp':emp,
+	  			 'precio1':precio1,
+	  			 'precio2':precio2,
+	  			 'precio3':precio3,
+	  			 'precio4':precio4,
+	  			 'compra':compra
+	  			 }).done(function(data) {
+	  				console.log(data);
+  					if(data.continuar){
+  						alerta("info","Se agrego la imagen para este articulo");
+  						resetform();
+  					}else{
+  						alerta("error", "Hubo un error guarde primero el articulo");
+  						}
+					});
+	 		}
+		});
+	}else{
+		$('.clave').addClass('falta_llenar');
+		$('.compra').addClass('falta_llenar');
+		$('.precio1').addClass('falta_llenar');
+		return false;
+	}
+});
+
 </script>
+<script src="http://malsup.github.com/jquery.form.js"></script>
