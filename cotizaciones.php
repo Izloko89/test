@@ -288,7 +288,7 @@ table{
             <input type="text" class="restante numerico" readonly="readonly" />
         </div>
         <div align="right">
-        	<a id="url" href="scripts/pdf.php?id_cotizacion=" target="_blank" onmouseover="tomavalor();">Imprimir cotización</a>
+        <a id="imp_cot" href="scripts/pdf_cotizacion.php" target="_blank">Imprimir cotización</a>
             <input type="button" class="crearevento" value="Pasar a evento" onclick="pasarevento();" />
         </div>
     </div>

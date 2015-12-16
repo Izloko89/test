@@ -333,6 +333,7 @@ function buscarClaveGet(){
 			//realiza las otras tareas
 			//asigna el id de cotización
 			cotizacion=r.id_cotizacion;
+			document.getElementById("imp_cot").setAttribute("href", "scripts/pdf_cotizacion.php?id=" + r.id_cotizacion);
 			get_items_cot(cotizacion);
 			checarTotal('cotizaciones',cotizacion);
 			
