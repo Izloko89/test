@@ -231,7 +231,7 @@ font-family: "Pacifico", sans-serif;
     <div style="width:100%; padding:0 15px; text-align:center;"><img src="../img/Ribbon.png" style="width:50%;" /></div>
     <table align="center" border="0" cellspacing="0" cellpadding="0" style="width:100%;font-size:10px;margin-top:5px; padding:5 30px; text-align:center">
         <tr>';
-            $total=0;
+            $total=1;
             foreach($articulos as $id=>$d){ 
             if (!($total == 3)){
                 $html.='
@@ -247,7 +247,7 @@ font-family: "Pacifico", sans-serif;
                 </td>';
             }
             else {
-                $total = 0;
+                $total = 1;
                 $html.='</tr></table>
                 <table align="center" border="0" cellspacing="0" cellpadding="0" style="width:100%;font-size:10px;margin-top:5px; padding:5 30px; text-align:center"> <tr>';
             }
