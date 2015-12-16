@@ -235,7 +235,16 @@ font-family: "Pacifico", sans-serif;
             foreach($articulos as $id=>$d){ 
             if (!($total == 3)){
                 $html.='
-                <td><img src="../img/articulos/'. $d["image"].'" width="150" /></td>';
+                <td>
+                    <table>
+                        <tr>
+                            <td><img src="../img/articulos/'. $d["image"].'" width="150" /></td>
+                        </tr>
+                        <tr>
+                            <td class = "cursiva" style="width:55%; text-align:center">'. $d["nombre"].'</td>
+                        </tr>
+                    </table>
+                </td>';
             }
             else {
                 $total = 0;
