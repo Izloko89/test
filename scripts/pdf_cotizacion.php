@@ -231,8 +231,9 @@ font-family: "Pacifico", sans-serif;
     <div style="width:100%; padding:0 15px; text-align:center;"><img src="../img/Ribbon.png" style="width:50%;" /></div>
     <table align="center" border="0" cellspacing="0" cellpadding="0" style="width:100%;font-size:10px;margin-top:5px; padding:5 30px; text-align:center">
         <tr>';
-            $total=1;
+            $total=0;
             foreach($articulos as $id=>$d){ 
+            if (!($total == 3)){
                 $html.='
                 <td>
                     <table>
@@ -245,7 +246,26 @@ font-family: "Pacifico", sans-serif;
                     </table>
                 </td>';
             }
-            $html.='</tr></table>';
+            else {
+                $total = 0;
+                $html.='</tr></table>
+                <table align="center" border="0" cellspacing="0" cellpadding="0" style="width:100%;font-size:10px;margin-top:5px; padding:5 30px; text-align:center">
+                <tr>
+                <td>
+                    <table>
+                        <tr>
+                            <td><img src="../img/articulos/'. $d["image"].'" width="150" /></td>
+                        </tr>
+                        <tr>
+                            <td class = "cursiva" style="width:55%; text-align:center">'. $d["nombre"].'</td>
+                        </tr>
+                    </table>
+                </td>
+                ';
+            }
+            $total++;
+            }
+            $html.='</tr></table>'; 
             $html.='
             <div style="width:100%; padding:5 20px; text-align:justify;">
             A	continuación	te	presento	los	canapés	seleccionados	para	la	Bienvenida:
@@ -326,10 +346,10 @@ $filename="generador.pdf";
 //$orientar=$_POST["orientar"];
 $orientar="portrait";
 
-//echo $html;
-$topdf=new HTML2PDF($orientar,array($mmCartaW,$mmCartaH),'es');
-$topdf->writeHTML($html);
-$topdf->Output();
+echo $html;
+//$topdf=new HTML2PDF($orientar,array($mmCartaW,$mmCartaH),'es');
+//$topdf->writeHTML($html);
+//$topdf->Output();
 //$path.$filename,'F'
 
 //echo "http://".$_SERVER['HTTP_HOST']."/docs/".$filename;
