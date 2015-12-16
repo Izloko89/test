@@ -334,8 +334,9 @@ $filename="generador.pdf";
 //$orientar=$_POST["orientar"];
 $orientar="portrait";
 
-$topdf=new HTML2PDF($orientar,array($mmCartaW,$mmCartaH),'es');
-$topdf->writeHTML($html);
+echo $html;
+//$topdf=new HTML2PDF($orientar,array($mmCartaW,$mmCartaH),'es');
+//$topdf->writeHTML($html);
 //$topdf->Output();
 //$path.$filename,'F'
 
