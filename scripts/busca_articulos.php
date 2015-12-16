@@ -16,7 +16,8 @@ try{
 		precio4 as p4,
 		areas.nombre,
 		familias.nombre,
-		subfamilias.nombre
+		subfamilias.nombre,
+		articulos.image
 	FROM articulos
 	INNER JOIN listado_precios ON articulos.id_articulo=listado_precios.id_articulo
 	INNER JOIN areas ON articulos.area= areas.id_area

@@ -216,6 +216,7 @@ table{
         <th width="100">precio unitario</th>
         <th width="100">total</th>
         <th width="150">Acciones</th>
+        <th width="150">Imagen</th>
       </tr>
     </table>
     </div>

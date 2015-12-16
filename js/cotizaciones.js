@@ -39,7 +39,7 @@ $(document).ready(function(e) {
 	id_cotizacion=$(".id_cotizacion").first().val();
 	$(".agregar_articulo").click(function(){
 		id=$(".lista_articulos").length+1;
-		$("#articulos").append('<tr id="'+id+'" class="lista_articulos"><td style="background-color:#FFF;"><input type="hidden" class="id_item" value="" /><input type="hidden" class="id_cotizacion" value="" /><input type="hidden" class="id_articulo" /><input type="hidden" class="id_paquete" /></td><td><input class="cantidad" type="text" size="7" onkeyup="cambiar_cant('+id+')" /></td><td><input class="articulo_nombre text_full_width" onkeyup="art_autocompletar('+id+');" /></td><td>$<span class="precio"></span></td><td>$<span class="total"></span></td><td><span class="guardar_articulo" onclick="guardar_art('+id+')"></span><span class="eliminar_articulo" onclick="eliminar_art('+id+')"></span></td></tr>');
+		$("#articulos").append('<tr id="'+id+'" class="lista_articulos"><td style="background-color:#FFF;"><input type="hidden" class="id_item" value="" /><input type="hidden" class="id_cotizacion" value="" /><input type="hidden" class="id_articulo" /><input type="hidden" class="id_paquete" /></td><td><input class="cantidad" type="text" size="7" onkeyup="cambiar_cant('+id+')" /></td><td><input class="articulo_nombre text_full_width" onkeyup="art_autocompletar('+id+');" /></td><td>$<span class="precio"></span></td><td>$<span class="total"></span></td><td><span class="guardar_articulo" onclick="guardar_art('+id+')"></span><span class="eliminar_articulo" onclick="eliminar_art('+id+')"></span></td><td id="preview-img-'+id+'"></td></tr>');
 		$.each($(".lista_articulos"),function(i,v){
 			$(this).find(".id_cotizacion").val(id_cotizacion);
 		});
@@ -235,12 +235,31 @@ function art_autocompletar(id){
 	  source: "scripts/busca_articulos.php",
 	  minLength: 1,
 	  select: function( event, ui ) {
-		  total.parent().parent().removeClass("verde_ok");
-		  id_articulo.val(ui.item.id_articulo);
-		  id_paquete.val(ui.item.id_paquete);
-		  precio.html(ui.item.precio);
-		  totalca=cantidad*ui.item.precio;
-		  total.html(totalca);
+			total.parent().parent().removeClass("verde_ok");
+			console.log(ui);
+			id_articulo.val(ui.item.id_articulo);
+			art = ui.item.id_articulo;
+			cot = document.getElementById("clave").value;
+			id_paquete.val(ui.item.id_paquete);
+			precio.html(ui.item.precio);
+			totalca=cantidad*ui.item.precio;
+			total.html(totalca);
+			$('#preview-img-'+id).empty().append('<img src="img/articulos/'+ui.item.image+'" width="130" height="100" />');
+			$.ajax({
+				url:'scripts/busca_existencia.php',
+				cache:false,
+				async:false,
+				data:{
+					'art':art,
+					'cot':cot,
+					'cant':cantidad
+				},
+				success: function(r){
+					if(r){
+						alerta("info", r);
+					}
+				}
+			});
 	  }
 	});
 }
