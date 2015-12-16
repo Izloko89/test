@@ -233,7 +233,7 @@ font-family: "Pacifico", sans-serif;
         <tr>';
             $total=0;
             foreach($articulos as $id=>$d){ 
-            if ($total == 3){
+            if (!($total == 3)){
                 $html.='
                 <td>
                     <table>
