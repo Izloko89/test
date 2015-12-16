@@ -233,7 +233,6 @@ font-family: "Pacifico", sans-serif;
         <tr>';
             $total=1;
             foreach($articulos as $id=>$d){ 
-            if (!($total == 3)){
                 $html.='
                 <td>
                     <table>
@@ -246,14 +245,7 @@ font-family: "Pacifico", sans-serif;
                     </table>
                 </td>';
             }
-            else {
-                $total = 1;
-                $html.='</tr></table>
-                <table align="center" border="0" cellspacing="0" cellpadding="0" style="width:100%;font-size:10px;margin-top:5px; padding:5 30px; text-align:center"> <tr>';
-            }
-            $total++;
-            }
-            $html.='</tr></table>'; 
+            $html.='</tr></table>';
             $html.='
             <div style="width:100%; padding:5 20px; text-align:justify;">
             A	continuación	te	presento	los	canapés	seleccionados	para	la	Bienvenida:
