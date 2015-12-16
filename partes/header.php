@@ -85,7 +85,7 @@ $bd=NULL;
 <script type="text/javascript" src="js/jquery-ui-timepicker-addon.min.js"></script>
 <script src="js/jquery.numeric.js"></script>
 <script src="js/general.js"></script>
-<title>Eventos bichos to go</title>
+<title>La canaperia</title>
 </head>
 
 <body>
