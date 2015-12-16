@@ -336,7 +336,7 @@ $orientar="portrait";
 
 $topdf=new HTML2PDF($orientar,array($mmCartaW,$mmCartaH),'es');
 $topdf->writeHTML($html);
-$topdf->Output();
+//$topdf->Output();
 //$path.$filename,'F'
 
 //echo "http://".$_SERVER['HTTP_HOST']."/docs/".$filename;
