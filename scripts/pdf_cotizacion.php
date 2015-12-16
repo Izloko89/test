@@ -249,7 +249,7 @@ font-family: "Pacifico", sans-serif;
                 <td>
                     <table>
                         <tr>
-                            <td><img src="../img/articulos/'. $d["image"].'" width="150" /></td>
+                            <td><img src="../img/articulos/'. $d["image"].'" width="180" height="150" /></td>
                         </tr>
                         <tr>
                             <td class = "cursiva" style="width:55%; text-align:center">'. $d["nombre"].'</td>
