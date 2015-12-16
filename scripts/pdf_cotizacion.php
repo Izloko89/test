@@ -228,7 +228,7 @@ font-family: "Pacifico", sans-serif;
     <div style="width:100%; padding:0 20px; text-align:justify;">
     <textarea cols="68" rows="4" style="width:100%; padding:0 20px; text-align:justify;border:none;">A la llegada de los invitados se ofrecerá una barra de aguas frescas acompañadas de una selección especial de canapés que	refrescarán	a sus paladares</textarea>
   </div>   
-    <div style="width:100%; padding:0 15px; text-align:center;"><img src="../img/Ribbon.png" style="width:50%;" /></div>
+    <div style="width:100%; padding:0 15px; text-align:center;"><img src="../img/ribbon-inv.png" style="width:50%;" /></div>
     <table align="center" border="0" cellspacing="0" cellpadding="0" style="width:100%;font-size:10px;margin-top:5px; padding:5 30px; text-align:center">';
     $total=0;
     foreach($articulos as $id=>$d){
