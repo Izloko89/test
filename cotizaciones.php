@@ -104,7 +104,7 @@ table{
 <div id="contenido">
 <div id="tabs">
   <ul>
-    <li class="hacer"><a href="#hacer">Cotizar prub</a></li>
+    <li class="hacer"><a href="#hacer">Cotizar</a></li>
     <li class="mias"><a href="#mias">Mis cotizaciones</a></li>
   </ul>
   <div id="hacer">
